@@ -94,7 +94,7 @@ function getPowerFunction(exponent) {
 function getPolynom(...args) {
   if (args.length === 0) return null;
 
-  return function (x) {
+  return function getResult(x) {
     return args.reduce((acc, coeff, index) => {
       const power = args.length - index - 1;
       return acc + coeff * x ** power;
@@ -200,8 +200,12 @@ function partialUsingArguments(/* fn, ...args1 */) {
  *   getId4() => 7
  *   getId10() => 11
  */
-function getIdGeneratorFunction(/* startFrom */) {
-  throw new Error('Not implemented');
+function getIdGeneratorFunction(startFrom) {
+  let count = startFrom - 1;
+  return function getId() {
+    count += 1;
+    return count;
+  };
 }
 
 module.exports = {
